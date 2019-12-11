@@ -116,31 +116,23 @@ void conduction()
           double x1=0,x2=0,xk1=0,xk2=0;
           for(int i=1;i<=n;i++)
           {
-            for(int j=1;j<=m;j++)
-            {
 
-              if(j==1)
-              {
-              x1=x[i][j];
-              xk1=x[k][j];
-              }
-              else if(j==2)
-              {
-                x2=x[i][j];
-                xk2=x[k][j];
-              }
+                x1=x[i][1];
+                xk1=x[k][1];
+                  x2=x[i][2];
+                  xk2=x[k][2];
               if(evaluate(x1,x2)>evaluate(xk1,xk2))
                 {
-                    x[i][j]=x[k][j]+(-(R*R)*x[k][j]);
+                    x[i][1]=x[k][1]+(-(R*R)*x[k][1]);
+                    x[i][2]=x[k][2]+(-(R*R)*x[k][2]);
                 }
             else
             {
-                x[i][j]=x[i][j]+(-(R*R)*x[i][j]);
+                x[i][1]=x[i][1]+(-(R*R)*x[i][1]);
+                x[i][2]=x[i][2]+(-(R*R)*x[i][2]);
             }
             }
           }
-
-        }
         else if(iter>(mx_iter/CDF))
         {
 
@@ -148,31 +140,24 @@ void conduction()
             int k=int_rand(1,10);
           for(int i=1;i<=n;i++)
           {
-            for(int j=1;j<=m;j++)
-            {
 
-              if(j==1)
-              {
-              x1=x[i][j];
-              xk1=x[k][j];
-              }
-              else if(j==2)
-              {
-                x2=x[i][j];
-                xk2=x[k][j];
-              }
+                            x1=x[i][1];
+                            xk1=x[k][1];
+                              x2=x[i][2];
+                              xk2=x[k][2];
               if(evaluate(x1,x2)>evaluate(xk1,xk2))
                 {
-                    x[i][j]=x[k][j]+(-r[i]*x[k][j]);
+                    x[i][1]=x[k][1]+(-r[i]*x[k][1]);
+                    x[i][2]=x[k][2]+(-r[i]*x[k][2]);
                 }
             else
             {
-                x[i][j]=x[i][j]+(-r[i]*x[i][j]);
+                x[i][1]=x[i][1]+(-r[i]*x[i][1]);
+                x[i][2]=x[i][2]+(-r[i]*x[i][2]);
             }
             }
           }
 
-        }
 }
 void radiation()
 {
@@ -206,7 +191,7 @@ void radiation()
         {
 
           double x1=0,x2=0,xk1=0,xk2=0;
-            int k=(int)rand()%10;
+            int k=int_rand(1,10);
           for(int i=1;i<=n;i++)
           {
               x1=x[i][1];
@@ -261,7 +246,22 @@ void greedy()
          X[1][2]=min(X[1][2],x[i][2]);
          X[2][1]=min(X[2][1],x[i][1]);
          X[2][2]=min(X[2][2],x[i][2]);
-        cur_elite=(cur_elite+1)%(int)elit_size;
+         for(int j=1;j<=n;j++)
+         {
+           if(x[i][1]==x[j][1])
+           {
+             x[j][1]=randMToN(xmin1,xmax1);
+             break;
+           }
+         }
+         for(int j=1;j<=n;j++)
+         {
+           if(x[i][2]==x[j][2])
+           {
+             x[j][2]=randMToN(xmin1,xmax1);
+             break;
+           }
+         }
     }
 }
 int main()
